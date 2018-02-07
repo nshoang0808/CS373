@@ -109,7 +109,7 @@ public class glWarmup extends JFrame implements GLEventListener, KeyListener, Mo
         // your TODO item  (rotations in two other axes), hint: use glRotatef       
         gl.glRotatef(differenceAngleY, 0.0f, 1.0f, 0.0f);
         gl.glRotatef(differenceAngleZ, 0.0f, 0.0f, 1.0f);
-        // the above instructions calcuated a new rotation (matrix)
+        // the above instructions calculated a new rotation (matrix)
         // which now needs to be combined (multiplied) with the current rotation (matrix)        
         // OpenGL does the combination (matrix multiplication) for us in the next line
         // and stores the result internally (MODELVIEW matrix)        
@@ -259,10 +259,14 @@ public class glWarmup extends JFrame implements GLEventListener, KeyListener, Mo
             if (e.isShiftDown()) {
                 // your TODO item
             	differenceAngleZ = (float) Math.sqrt((y-mouseY)*(y-mouseY) + (x-mouseX)*(x-mouseX));
+            	if (x>mouseX) differenceAngleZ = -differenceAngleZ;
             } else {
-                    differenceAngleX = (y - mouseY);
-                    // ... more TODO items ...
-                    differenceAngleY = (x - mouseX);
+            	if (Math.abs(y - mouseY) > 1.0f * Math.abs(x - mouseX)) {
+            		differenceAngleX = (y - mouseY);
+            	} 
+            	if (Math.abs(x - mouseX) > 1.0f * Math.abs(y - mouseY)) {
+            		differenceAngleY = (x - mouseX);
+            	}
             }
         }
         mouseX = x;
